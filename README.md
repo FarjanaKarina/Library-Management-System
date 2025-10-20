@@ -1,131 +1,65 @@
 # 📚 Library Management System – Project Plan
 
-This project aims to develop a **Library Management System** divided into two main independent parts, allowing each of the two team members to work efficiently with minimal dependencies.
+This project is designed to build a **Library Management System** divided into **two main independent parts**, allowing both team members to work in parallel with minimal dependencies.
+Each part covers both **entity management** and **process-oriented** modules.
 
 ---
 
 ## 🧩 Project Structure Overview
 
-The system is divided into two core parts:
-
-* **Part 1:** Core Catalog and User Management *(Assigned to Member 1)*
-* **Part 2:** Circulation and Financials *(Assigned to Member 2)*
-
-Both parts will be developed in parallel and integrated after completion.
+| Part       | Area of Focus               | Assigned To |
+| ---------- | --------------------------- | ----------- |
+| **Part 1** | User & Financial Management | Member 1    |
+| **Part 2** | Book Catalog & Circulation  | Member 2    |
 
 ---
 
-## 🧠 Part 1: Core Catalog and User Management
+## 👤 Part 1: User & Financial Management
 
 **Assigned to:** *Member 1*
 
-This part focuses on the foundational data of the library — the books, members, and staff.
-
-### 📗 Modules to Develop
-
-#### 1. **Book Catalog / Master Data Management**
-
-**Database Schema:**
-
-* `Books` table with fields like `BookId`, `Title`, `Author`, `Category`, `ISBN`, `Status`, etc.
-
-**UI/UX:**
-
-* Form to add new books
-* Form to edit existing book details
-* View to list all books with **search** and **filter** (by category, author, availability)
-
-**Backend/Logic:**
-
-* Add, update, and delete book records
-* Search and filter functionality
-* Manage book status: *Available, Issued, Damaged/Lost*
+This part focuses on managing all users of the system — both **members** and **staff** — along with handling financial aspects like fines and payments.
 
 ---
 
-#### 2. **Member / Student Management**
+### 🧍‍♂️ Member / Student Management *(Actor)*
 
 **Database Schema:**
 
-* `Members` table with fields such as `MemberId`, `MemberName`, `MemberType`, `Contact`, `ExpiryDate`, etc.
+* `Members` table with fields such as `MemberId`, `MemberName`, `MemberType`, `ContactInfo`, `Status`, `ExpiryDate`, etc.
 
 **UI/UX:**
 
-* New member registration form
-* Edit member information form
-* List view with **search** and **filter** options
+* Form for new member registration
+* Form to edit existing member details
+* View to list all members with **search** and **filter** options
 
 **Backend/Logic:**
 
-* Register and update member details
-* Manage membership status (*Active/Inactive*) and expiry tracking
+* Functions to register and update members
+* Logic to manage membership **status (Active/Inactive)** and track **expiry dates**
 
 ---
 
-#### 3. **Staff / Librarian Management**
+### 👩‍💼 Staff / Librarian Management *(Actor)*
 
 **Database Schema:**
 
-* `Staff` table with fields like `StaffId`, `FullName`, `Role`, `Username`, `Password`, etc.
+* `Staff` table with fields such as `StaffId`, `FullName`, `Role`, `Username`, `Password`, etc.
 
 **UI/UX:**
 
-* Form to add and manage staff
-* Login interface
+* Forms to add and manage staff
+* Login interface for system access
 
 **Backend/Logic:**
 
 * User authentication and **role-based access control** (Admin, Librarian)
-* Secure password handling (**hashing**)
+* Secure password handling using **hashing**
 
 ---
 
-## 💼 Part 2: Circulation and Financials
-
-**Assigned to:** *Member 2*
-
-This section handles the operational workflow — issuing, returning books, and managing fines.
-
-### 📚 Modules to Develop
-
-#### 1. **Book Issue Management**
-
-**Database Schema:**
-
-* `BookIssue` table with fields like `IssueId`, `MemberId`, `BookId`, `IssueDate`, `DueDate`, etc.
-
-**UI/UX:**
-
-* Interface to issue books to members (with book and member search)
-
-**Backend/Logic:**
-
-* Record book issue transactions
-* Automatically update book status to *Issued*
-* Calculate due dates automatically
-* Enforce borrowing limits per member
-
----
-
-#### 2. **Book Return Management**
-
-**Database Schema:**
-
-* Use `BookReturn` table **or** update `BookIssue` upon return
-
-**UI/UX:**
-
-* Interface to process book returns
-
-**Backend/Logic:**
-
-* Record book returns
-* Update book status back to *Available*
-* Calculate and display overdue fines
-
----
-
-#### 3. **Fine & Payment Management**
+### 💰 Fine & Payment Management *(Process)*
 
 **Database Schema:**
 
@@ -133,50 +67,115 @@ This section handles the operational workflow — issuing, returning books, and 
 
 **UI/UX:**
 
-* View for librarians to check outstanding fines
-* Payment recording interface
+* View for librarians to see **outstanding fines per member**
+* Interface to record fine **payments**
 
 **Backend/Logic:**
 
-* Automatically create fine records for overdue books
-* Update fine payment status upon settlement
+* Handle fine records created from **overdue returns**
+* Update and track payment status (**Paid/Unpaid**)
+
+---
+
+## 📖 Part 2: Book Catalog & Circulation
+
+**Assigned to:** *Member 2*
+
+This part focuses on managing the **library’s inventory (books)** and handling **core operations** like issuing and returning books.
+
+---
+
+### 📚 Book Catalog / Master Data Management *(Actor)*
+
+**Database Schema:**
+
+* `Books` table with fields such as `BookId`, `Title`, `Author`, `Category`, `ISBN`, `Status`, etc.
+
+**UI/UX:**
+
+* Form to add new books
+* Form to edit existing book details
+* View to list books with **search** and **filter** functionality
+
+**Backend/Logic:**
+
+* Add, update, and delete book records
+* Implement search and filter logic
+* Manage book status: *Available, Issued, Damaged, Lost*
+
+---
+
+### 🔄 Book Issue Management *(Process)*
+
+**Database Schema:**
+
+* `BookIssue` table with fields such as `IssueId`, `MemberId`, `BookId`, `IssueDate`, `DueDate`, etc.
+
+**UI/UX:**
+
+* User-friendly interface to issue a book
+* Search for **available books** and **active members**
+
+**Backend/Logic:**
+
+* Record issue transactions
+* Automatically update book status to **"Issued"**
+* Auto-calculate and store **due dates**
+* Enforce borrowing limits per member
+
+---
+
+### 📥 Book Return Management *(Process)*
+
+**Database Schema:**
+
+* Logic to handle returns, e.g., by updating the `BookIssue` table or maintaining a `BookReturn` log
+
+**UI/UX:**
+
+* Interface to process book returns via issue record lookup
+
+**Backend/Logic:**
+
+* Record returns and update book status to **"Available"**
+* Check if overdue and automatically create **Fine records** in the `Fines` table
 
 ---
 
 ## 🤝 Shared Responsibilities
 
-| Task                       | Description                                                                                                 |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| **Database Design**        | Both members collaborate to finalize the database schema and relationships before development begins.       |
-| **Reporting & Analytics**  | Split based on modules: Member 1 handles books/members reports, Member 2 handles circulation/fines reports. |
-| **Notifications & Alerts** | Shared feature — can be divided by module context.                                                          |
-| **Testing & Deployment**   | Each member tests their modules independently before final integration testing.                             |
+| Responsibility              | Description                                                                                                  |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Initial Database Design** | Both members collaborate to define the database schema and relationships before starting development.        |
+| **Reporting & Analytics**   | Split by module: Member 1 handles **user/financial** reports, Member 2 handles **book/circulation** reports. |
+| **Notifications & Alerts**  | Shared responsibility — divided based on module needs.                                                       |
+| **Testing & Deployment**    | Each member tests their modules independently, followed by **integration and system-level testing**.         |
 
 ---
 
-## 🏁 Development Flow
+## 🏗️ Development Phases
 
 1. **Phase 1:** Database design & schema alignment
 2. **Phase 2:** Independent module development
-3. **Phase 3:** Integration & testing
-4. **Phase 4:** UI/UX refinement & final deployment
+3. **Phase 3:** Integration & end-to-end testing
+4. **Phase 4:** UI/UX refinement and deployment
 
 ---
 
-## ⚙️ Technologies (Suggested)
+## ⚙️ Suggested Tech Stack
 
-* **Frontend:** HTML, CSS, JavaScript, Bootstrap
-* **Backend:** PHP / ASP.NET / Node.js (based on project setup)
-* **Database:** MySQL / SQL Server
-* **Version Control:** Git & GitHub
-
----
-
-## 👥 Team Collaboration Notes
-
-* Keep commits frequent and descriptive.
-* Use feature branches for each module.
-* Perform code reviews before merging to `main`.
-* Maintain shared documentation for database and API structure.
+| Layer               | Technology                       |
+| ------------------- | -------------------------------- |
+| **Frontend**        | HTML, CSS, JavaScript, Bootstrap |
+| **Backend**         | PHP / ASP.NET / Node.js          |
+| **Database**        | MySQL / SQL Server               |
+| **Version Control** | Git & GitHub                     |
 
 ---
+
+## 🧠 Collaboration Guidelines
+
+* Commit frequently with descriptive messages
+* Use **feature branches** for each module
+* Review and merge via **pull requests**
+* Keep shared documentation (API, schema, workflows) updated
