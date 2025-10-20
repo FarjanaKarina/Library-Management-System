@@ -1,4 +1,4 @@
-﻿namespace LMS.Models
+﻿namespace LMS.Data_Models
 {
     public class Book
     {
