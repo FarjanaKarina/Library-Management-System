@@ -1,4 +1,4 @@
-﻿namespace LMS.Data_Models
+﻿namespace LMS.ViewModel
 {
     public class BookReturn
     {

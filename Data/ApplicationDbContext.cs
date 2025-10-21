@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using LMS.DataModel;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Data
@@ -9,5 +10,12 @@ namespace LMS.Data
             : base(options)
         {
         }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Member> Members { get; set; }
+        public DbSet<BookIssue> BookIssues { get; set; }
+        public DbSet<BookReturn> BookReturns { get; set; }
+        public DbSet<Fine> Fines { get; set; }
+
+
     }
 }
