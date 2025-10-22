@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LMS.DataModel
@@ -6,12 +7,10 @@ namespace LMS.DataModel
     public class Fine
     {
         [Key]
-        public int FineId { get; set; }
+        public Guid FineId { get; set; }
 
-        public int MemberId { get; set; }
-
-        // If you have a table for Book Issues, link it too
-        public int? IssueId { get; set; } // Optional — related to issued book
+        public Guid MemberId { get; set; }
+        public Guid BookIssueId { get; set; } // Optional — related to issued book
 
         public decimal FineAmount { get; set; }
 

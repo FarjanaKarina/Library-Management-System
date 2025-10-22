@@ -8,10 +8,14 @@ namespace LMS.DataModel
     public class Member
     {
         [Key]
-        public int MemberId { get; set; }
+        public Guid MemberId { get; set; }
+        [StringLength(25)]
         public string? MemberName { get; set; }
+        [StringLength(25)]
         public string? MemberType { get; set; } // e.g., Student, Teacher, Guest
+        [StringLength(25)]
         public string? ContactInfo { get; set; }
+        [StringLength(25)]
         public string Status { get; set; } = "Active"; // Active / Inactive
         public DateTime ExpiryDate { get; set; }
         public DateTime RegistrationDate { get; set; } = DateTime.Now;
