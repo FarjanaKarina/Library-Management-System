@@ -15,5 +15,9 @@ namespace LMS.ViewModel
         public string Status { get; set; } = "Active"; // Active / Inactive
         public DateTime ExpiryDate { get; set; }
         public DateTime RegistrationDate { get; set; } = DateTime.Now;
+        public object MembershipDate { get; internal set; }
+        public object PhoneNumber { get; internal set; }
+        public object Email { get; internal set; }
+        public object Name { get; internal set; }
     }
 }

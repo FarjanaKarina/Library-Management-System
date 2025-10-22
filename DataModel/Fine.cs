@@ -19,6 +19,9 @@ namespace LMS.DataModel
         public DateTime FineDate { get; set; } = DateTime.Now;
 
         public DateTime? PaymentDate { get; set; }
-
+        public object MemberName { get; internal set; }
+        public object Amount { get; internal set; }
+        public object Reason { get; internal set; }
+        public object DateIssued { get; internal set; }
     }
 }

@@ -15,7 +15,8 @@ namespace LMS.DataModel
         public DateTime? ReturnDate { get; set; }
         public decimal FineAmount { get; set; } = 0;
         [StringLength(25)]
-        public string? Status { get; set; } 
-       
+        public string? Status { get; set; }
+        public object MemberName { get; internal set; }
+        public object BookTitle { get; internal set; }
     }
 }

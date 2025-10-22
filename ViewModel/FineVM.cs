@@ -16,6 +16,10 @@
         public DateTime? PaymentDate { get; set; }
 
         public MemberVM? MemberVM { get; set; }
-        public BookVM? BookVM { get; set; } 
-}
+        public BookVM? BookVM { get; set; }
+        public object MemberName { get; internal set; }
+        public object Amount { get; internal set; }
+        public object Reason { get; internal set; }
+        public object DateIssued { get; internal set; }
+    }
 }

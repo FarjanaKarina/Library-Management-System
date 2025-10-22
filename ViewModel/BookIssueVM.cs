@@ -13,5 +13,7 @@ namespace LMS.ViewModel
         public decimal FineAmount { get; set; } = 0;
         [StringLength(25)]
         public string? Status { get; set; }
+        public object MemberName { get; internal set; }
+        public object BookTitle { get; internal set; }
     }
 }
