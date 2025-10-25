@@ -15,9 +15,11 @@ namespace LMS.DataModel
         public string? MemberType { get; set; } // e.g., Student, Teacher, Guest
         [StringLength(25)]
         public string? ContactInfo { get; set; }
+        public string? Address { get; set; }
         [StringLength(25)]
         public string Status { get; set; } = "Active"; // Active / Inactive
         public DateTime ExpiryDate { get; set; }
+        public DateTime JoinDate { get; set; }
         public DateTime RegistrationDate { get; set; } = DateTime.Now;
         public object Name { get; internal set; }
         public object Email { get; internal set; }

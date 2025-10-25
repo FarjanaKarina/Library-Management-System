@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LMS.ViewModel;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,5 +18,6 @@ namespace LMS.DataModel
         public object BookTitle { get; internal set; }
         public object IssueDate { get; internal set; }
         public object Status { get; internal set; }
+        public List<BookReturnVM> BookReturnList { get; set; }
     }
 }

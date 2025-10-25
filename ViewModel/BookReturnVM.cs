@@ -14,5 +14,6 @@ namespace LMS.ViewModel
         public object BookTitle { get; internal set; }
         public object IssueDate { get; internal set; }
         public object Status { get; internal set; }
+        public List<BookReturnVM> BookReturnList { get; set; }
     }
 }
