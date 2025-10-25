@@ -21,4 +21,8 @@
     <Folder Include="wwwroot\Admin\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="LMS\Models\" />
+  </ItemGroup>
+
 </Project>
