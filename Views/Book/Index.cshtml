@@ -1,44 +1,20 @@
-﻿@{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewData["Title"] = "Manage Books";
-}
-@model LMS.ViewModel.BookVM
+﻿@model IEnumerable<LMS.DataModel.Book>
 
-<h1>Hey! This is Book Controller Index</h1>
+<h2>Book List</h2>
+<a href="/Book/Create" class="btn btn-primary mb-2">Add New Book</a>
 
-<form asp-action="Index" asp-controller="Book">
-    <label>Book Title</label>
-    <input type="string" asp-for="Title" placeholder="Enter Title"/>
-    <label>Book Author</label>
-    <input type="string" asp-for="Author" placeholder="Enter Author Name" />
-    <label>Publisher</label>
-    <input type="string" asp-for="Publisher" placeholder="Enter Publisher Name" />
-    <label>Book Category</label>
-    <input type="string" asp-for="Category" placeholder="Book Category" />
-    <select asp-for="Category">
-        <option value="Fiction">Fiction</option>
-        <option value="Science">Science</option>
-        <option value="History">History</option>
-        <option value="Mystery">Mystery</option>
-        <option value="Biography">Biography</option>
-        <option value="Romance">Romance</option>
-        <option value="Fantasy">Fantasy</option>
-        <option value="ScienceFiction">ScienceFiction</option>
-    </select>
-    <label>Purchase Date</label>
-    <input type="date" asp-for="PurchaseDate" placeholder="Enter Purchase Date" />
-    <label>Price</label>
-    <input type="number" asp-for="Price" placeholder="Enter Price" />
-    <label>Book Quantity</label>
-    <input type="number" asp-for="Quantity" placeholder="Enter Book Quantity" />
-    <label>Status</label>
-    <input type="string" asp-for="Status"/>
-    <select asp-for="Status">
-        <option value="Available">Available</option>
-        <option value="Unavailable">Unavailable</option>
-        <option value="Issued">Issued</option>
-        <option value="Damaged">Damaged</option>
-        <option value="Lost">Lost</option>
-    </select>
-    <button>Submit</button>
-</form>
+<table class="table table-bordered">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Author</td>
+            <td>@item.Category</td>
+        </tr>
+    }
+</table>

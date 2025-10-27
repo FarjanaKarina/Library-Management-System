@@ -1,7 +1,6 @@
 using LMS.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ApplicationDbContext__LMS;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +30,8 @@ else
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

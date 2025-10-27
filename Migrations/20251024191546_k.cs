@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LMS.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class K : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,51 +51,18 @@ namespace LMS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookIssues",
-                columns: table => new
-                {
-                    BookIssueId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MemberId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BookId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IssueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    FineAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookIssues", x => x.BookIssueId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BookReturns",
-                columns: table => new
-                {
-                    BookReturnId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BookIssueId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FineAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Remarks = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookReturns", x => x.BookReturnId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
                 {
                     BookId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
-                    Author = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Publisher = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Publisher = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Category = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
                     PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true)
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,31 +70,14 @@ namespace LMS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Fines",
-                columns: table => new
-                {
-                    FineId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MemberId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BookIssueId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FineAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FineDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Fines", x => x.FineId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Members",
                 columns: table => new
                 {
                     MemberId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MemberName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
+                    MemberName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MemberType = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
-                    ContactInfo = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    ContactInfo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -242,6 +192,85 @@ namespace LMS.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "BookIssues",
+                columns: table => new
+                {
+                    BookIssueId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MemberId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BookId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IssueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookIssues", x => x.BookIssueId);
+                    table.ForeignKey(
+                        name: "FK_BookIssues_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "BookId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BookIssues_Members_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "Members",
+                        principalColumn: "MemberId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookReturns",
+                columns: table => new
+                {
+                    BookReturnId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BookIssueId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FineAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Remarks = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookReturns", x => x.BookReturnId);
+                    table.ForeignKey(
+                        name: "FK_BookReturns_BookIssues_BookIssueId",
+                        column: x => x.BookIssueId,
+                        principalTable: "BookIssues",
+                        principalColumn: "BookIssueId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Fines",
+                columns: table => new
+                {
+                    FineId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MemberId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BookIssueId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    FineAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    FineDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fines", x => x.FineId);
+                    table.ForeignKey(
+                        name: "FK_Fines_BookIssues_BookIssueId",
+                        column: x => x.BookIssueId,
+                        principalTable: "BookIssues",
+                        principalColumn: "BookIssueId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Fines_Members_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "Members",
+                        principalColumn: "MemberId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -280,6 +309,31 @@ namespace LMS.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookIssues_BookId",
+                table: "BookIssues",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookIssues_MemberId",
+                table: "BookIssues",
+                column: "MemberId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookReturns_BookIssueId",
+                table: "BookReturns",
+                column: "BookIssueId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fines_BookIssueId",
+                table: "Fines",
+                column: "BookIssueId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fines_MemberId",
+                table: "Fines",
+                column: "MemberId");
         }
 
         /// <inheritdoc />
@@ -301,25 +355,25 @@ namespace LMS.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "BookIssues");
-
-            migrationBuilder.DropTable(
                 name: "BookReturns");
 
             migrationBuilder.DropTable(
-                name: "Books");
-
-            migrationBuilder.DropTable(
                 name: "Fines");
-
-            migrationBuilder.DropTable(
-                name: "Members");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "BookIssues");
+
+            migrationBuilder.DropTable(
+                name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "Members");
         }
     }
 }

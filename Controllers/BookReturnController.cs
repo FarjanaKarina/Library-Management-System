@@ -1,41 +1,38 @@
 ﻿using LMS.Data;
 using LMS.DataModel;
-using LMS.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 
 namespace LMS.Controllers
 {
     public class BookReturnController : Controller
     {
-        private readonly ApplicationDbContext _dbConn;
+        private readonly ApplicationDbContext _db;
 
-        public BookReturnController(ApplicationDbContext dbConn)
+        public BookReturnController(ApplicationDbContext db)
         {
-            _dbConn = dbConn;
+            _db = db;
         }
-        [HttpGet]
+
         public IActionResult Index()
         {
-            var getdata = _dbConn.BookReturns.ToList();
+            var data = _db.BookReturns.ToList();
+            return View(data);
+        }
 
+        public IActionResult Create()
+        {
             return View();
         }
+
         [HttpPost]
-        public IActionResult Index(BookReturnVM viewModel)
+        public IActionResult Create(BookReturn ret)
         {
-            var dataModel = new BookReturn();
-            dataModel.MemberName = viewModel.MemberName;
-            dataModel.BookTitle = viewModel.BookTitle;
-            dataModel.IssueDate = viewModel.IssueDate;
-            dataModel.ReturnDate = viewModel.ReturnDate;
-            dataModel.FineAmount = viewModel.FineAmount;
-            dataModel.Status = viewModel.Status;
-
-
-            _dbConn.BookReturns.Add(dataModel);
-            _dbConn.SaveChanges();
-
-            return View(viewModel);
+            ret.ReturnId = Guid.NewGuid();
+            _db.BookReturns.Add(ret);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

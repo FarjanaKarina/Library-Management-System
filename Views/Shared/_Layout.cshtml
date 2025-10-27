@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=fallback">
     <link rel="stylesheet" href="~/Admin/plugins/fontawesome-free/css/all.min.css" />
 
-    <!-- Theme Style (same as AdminLTE color tone) -->
+    <!-- Theme Style -->
     <link rel="stylesheet" href="~/Admin/dist/css/adminlte.min.css" />
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -29,7 +29,7 @@
 
         /* ======= Navbar ======= */
         .navbar {
-            background-color: #001f3f; /* Deep navy like AdminLTE sidebar */
+            background-color: #001f3f;
             padding: 0.75rem 1rem;
         }
 
@@ -97,14 +97,16 @@
     <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                📚 LMS
+                My Library
             </a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
                     aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarMain">
+                <!-- Left-side Nav -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Home" asp-action="Index">
@@ -122,12 +124,23 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Report" asp-action="Index">
-                            <i class="fas fa-chart-line"></i> Reports
+                        <a class="nav-link" asp-controller="BookIssue" asp-action="Index">
+                            <i class="fas fa-book-reader"></i> Issue Books
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="BookReturn" asp-action="Index">
+                            <i class="fas fa-undo-alt"></i> Return Books
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Fine" asp-action="Index">
+                            <i class="fas fa-money-bill"></i> Fines
                         </a>
                     </li>
                 </ul>
 
+                <!-- Right-side Auth Links -->
                 <ul class="navbar-nav ms-auto">
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -161,8 +174,8 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container mt-5 pt-4">
-        <main role="main">
+    <div class="container mt-5 pt-5">
+        <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>

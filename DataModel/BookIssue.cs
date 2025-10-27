@@ -1,22 +1,16 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LMS.DataModel
 {
     public class BookIssue
     {
         [Key]
-        public Guid BookIssueId { get; set; }
+        public Guid IssueId { get; set; }
         public Guid MemberId { get; set; }
         public Guid BookId { get; set; }
         public DateTime IssueDate { get; set; }
         public DateTime DueDate { get; set; }
-        public DateTime? ReturnDate { get; set; }
-        public decimal FineAmount { get; set; } = 0;
-        [StringLength(25)]
-        public string? Status { get; set; }
-        public object MemberName { get; internal set; }
-        public object BookTitle { get; internal set; }
+        public DateTime? ReturnDate { get; set; } // nullable
+        public decimal FineAmount { get; set; }
     }
 }

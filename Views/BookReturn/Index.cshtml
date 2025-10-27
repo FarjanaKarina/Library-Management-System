@@ -1,4 +1,30 @@
-﻿@{
+﻿@model IEnumerable<LMS.DataModel.BookReturn>
+@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewData["Title"] = "";
+    ViewData["Title"] = "Manage Returns";
 }
+
+<h2 class="mb-3">Returned Books</h2>
+<a href="/Return/Create" class="btn btn-primary mb-3">Add Return</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Return Date</th>
+            <th>Return ID</th>
+            <th>Issue ID</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ReturnDate.ToShortDateString()</td>
+                <td>@item.ReturnId</td>
+                <td>@item.IssueId</td>
+                <td>@item.Remarks</td>
+            </tr>
+        }
+    </tbody>
+</table>

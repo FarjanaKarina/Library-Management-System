@@ -1,0 +1,31 @@
+﻿@model LMS.DataModel.BookReturn
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Add Return";
+}
+
+<h2 class="mb-3">Add New Book Return</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label>Return ID</label>
+        <input asp-for="ReturnId" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Issue ID</label>
+        <input asp-for="IssueId" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Return Date</label>
+        <input asp-for="ReturnDate" type="date" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Remarks</label>
+        <input asp-for="Remarks" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+</form>

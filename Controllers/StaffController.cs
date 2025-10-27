@@ -6,34 +6,31 @@ using System.Linq;
 
 namespace LMS.Controllers
 {
-    public class BookController : Controller
+    public class StaffController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public BookController(ApplicationDbContext db)
+        public StaffController(ApplicationDbContext db)
         {
             _db = db;
         }
 
-        // GET: Book
         public IActionResult Index()
         {
-            var data = _db.Books.ToList();
+            var data = _db.Staffs.ToList();
             return View(data);
         }
 
-        // GET: Book/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Book/Create
         [HttpPost]
-        public IActionResult Create(Book book)
+        public IActionResult Create(Staff staff)
         {
-            book.BookId = Guid.NewGuid();
-            _db.Books.Add(book);
+            staff.StaffId = Guid.NewGuid();
+            _db.Staffs.Add(staff);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }

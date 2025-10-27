@@ -1,4 +1,34 @@
-﻿@{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewData["Title"] = "";
+﻿@model IEnumerable<LMS.ViewModel.BookIssueVM>
+@{
+    ViewData["Title"] = "Book Issue List";
 }
+
+<h2>Book Issue List</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">+ Issue Book</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Member Name</th>
+            <th>Issue Date</th>
+            <th>Due Date</th>
+            <th>Return Date</th>
+            <th>Fine</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BookTitle</td>
+                <td>@item.MemberName</td>
+                <td>@item.IssueDate.ToShortDateString()</td>
+                <td>@item.DueDate.ToShortDateString()</td>
+                <td>@(item.ReturnDate.HasValue? item.ReturnDate.Value.ToShortDateString() : "Not Returned")</td>
+                <td>@(item.FineAmount.HasValue? item.FineAmount.Value.ToString("0.00") : "-")</td>
+            </tr>
+        }
+    </tbody>
+</table>
