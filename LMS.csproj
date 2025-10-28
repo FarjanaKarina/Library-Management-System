@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Service\" />
+    <Folder Include="wwwroot\Admin\" />
   </ItemGroup>
 
 </Project>

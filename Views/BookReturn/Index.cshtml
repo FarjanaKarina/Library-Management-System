@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<LMS.DataModel.BookReturn>
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-<<<<<<< HEAD
     ViewData["Title"] = "Manage Returns";
 }
 
@@ -14,71 +13,10 @@
             <th>Return Date</th>
             <th>Return ID</th>
             <th>Issue ID</th>
-=======
-    ViewData["Title"] = "";
-}
-@{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewData["Title"] = "Manage Book Returns";
-}
-@model LMS.ViewModel.BookReturnVM
-
-<h1>Hey! This is BookReturn Controller Index</h1>
-
-<form asp-action="Index" asp-controller="BookReturn" method="post">
-    <div>
-        <label>Book Issue Id</label>
-        <input type="number" asp-for="BookIssueId" placeholder="Enter Issue ID" required />
-    </div>
-
-    <div>
-        <label> Member </label>
-        <input type="number" asp-for="MemberName" placeholder="Enter Member Name" required />
-    </div>
-
-    <div>
-        <label>Book Title</label>
-        <input type="number" asp-for="BookTitle" placeholder="Enter Book Title" required />
-    </div>
-
-    <div>
-        <label>Return Date</label>
-        <input type="date" asp-for="ReturnDate" placeholder="Select Return Date" required />
-    </div>
-
-    <div>
-        <label>Remarks</label>
-        <input type="text" asp-for="Remarks" placeholder="Remarks (if any)" />
-    </div>
-
-    <div>
-        <label>Fine Amount</label>
-        <input type="number" asp-for="FineAmount" placeholder="Enter Fine Amount (if any)" />
-    </div>
-
-    <div>
-        <button type="submit">Submit</button>
-    </div>
-</form>
-
-<!-- Optional: Display existing records -->
-<hr />
-<h3>Existing Book Returns</h3>
-<table border="1" cellpadding="5">
-    <thead>
-        <tr>
-            <th>Return ID</th>
-            <th>Issue ID</th>
-            <th>Member ID</th>
-            <th>Book ID</th>
-            <th>Return Date</th>
-            <th>Fine Amount</th>
->>>>>>> 0d323f99f8dcd0d9e554e5f27dd629af1015fa09
             <th>Remarks</th>
         </tr>
     </thead>
     <tbody>
-<<<<<<< HEAD
         @foreach (var item in Model)
         {
             <tr>
@@ -90,27 +28,3 @@
         }
     </tbody>
 </table>
-=======
-        @if (Model != null && Model.BookReturnList != null && Model.BookReturnList.Any())
-        {
-            foreach (var item in Model.BookReturnList)
-            {
-                <tr>
-                    <td>@item.BookReturnId</td>
-                    <td>@item.BookIssueId</td>
-                    <td>@item.MemberName</td>
-                    <td>@item.BookTitle</td>
-                    <td>@item.ReturnDate.ToShortDateString()</td>
-                    <td>@item.FineAmount</td>
-                    <td>@item.Remarks</td>
-                </tr>
-            }
-        }
-        else
-        {
-            <tr><td colspan="7">No records found.</td></tr>
-        }
-    </tbody>
-</table>
-'
->>>>>>> 0d323f99f8dcd0d9e554e5f27dd629af1015fa09
