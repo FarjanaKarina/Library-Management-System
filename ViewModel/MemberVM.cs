@@ -1,21 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LMS.DataModel
+namespace LMS.ViewModel
 {
-    public class Member
+    public class MemberVM
     {
-        [Key]
         public Guid MemberId { get; set; }
+        [StringLength(25)]
         public string? MemberName { get; set; }
-<<<<<<< HEAD
-        public string? MemberType { get; set; } // Student, Staff, External
-        public string? Address { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? Email { get; set; }
-        public DateTime JoinDate { get; set; }
-        public DateTime ExpiryDate { get; set; }
-        public string? Status { get; set; } // Active, Inactive
-=======
         [StringLength(25)]
         public string? MemberType { get; set; } // e.g., Student, Teacher, Guest
         [StringLength(25)]
@@ -26,10 +17,9 @@ namespace LMS.DataModel
         public DateTime ExpiryDate { get; set; }
         public DateTime JoinDate { get; set; }
         public DateTime RegistrationDate { get; set; } = DateTime.Now;
-        public object Name { get; internal set; }
-        public object Email { get; internal set; }
-        public object PhoneNumber { get; internal set; }
         public object MembershipDate { get; internal set; }
->>>>>>> 0d323f99f8dcd0d9e554e5f27dd629af1015fa09
+        public object PhoneNumber { get; internal set; }
+        public object Email { get; internal set; }
+        public object Name { get; internal set; }
     }
 }

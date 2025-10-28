@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿@model IEnumerable<LMS.ViewModel.BookIssueVM>
 @{
     ViewData["Title"] = "Book Issue List";
@@ -32,3 +33,89 @@
         }
     </tbody>
 </table>
+=======
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "";
+}
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Manage Book Issues";
+}
+@model LMS.ViewModel.BookIssueVM
+
+<h1>Hey! This is Book Issue Controller Index</h1>
+
+<form asp-action="Index" asp-controller="BookIssue" method="post">
+    <div>
+        <label>Member ID</label>
+        <input type="number" asp-for="MemberId" placeholder="Enter Member ID" />
+    </div>
+
+    <div>
+        <label>Book ID</label>
+        <input type="number" asp-for="BookId" placeholder="Enter Book ID" />
+    </div>
+
+    <div>
+        <label>Issue Date</label>
+        <input type="date" asp-for="IssueDate" placeholder="Select Issue Date" />
+    </div>
+
+    <div>
+        <label>Due Date</label>
+        <input type="date" asp-for="DueDate" placeholder="Select Due Date" />
+    </div>
+
+    <div>
+        <label>Return Date (optional)</label>
+        <input type="date" asp-for="ReturnDate" placeholder="Select Return Date" />
+    </div>
+
+    <div>
+        <label>Fine Amount (if any)</label>
+        <input type="number" asp-for="FineAmount" step="0.01" placeholder="Enter Fine Amount" />
+    </div>
+
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+<!-- Optional: Display existing issue records -->
+@if (Model != null)
+{
+    <hr />
+    <h2>Issued Book List</h2>
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Issue ID</th>
+                <th>Member ID</th>
+                <th>Book ID</th>
+                <th>Issue Date</th>
+                <th>Due Date</th>
+                <th>Return Date</th>
+                <th>Fine Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.BookIssues != null)
+            {
+                foreach (var issue in ViewBag.BookIssues)
+                {
+                    <tr>
+                        <td>@issue.IssueId</td>
+                        <td>@issue.MemberId</td>
+                        <td>@issue.BookId</td>
+                        <td>@issue.IssueDate.ToShortDateString()</td>
+                        <td>@issue.DueDate.ToShortDateString()</td>
+                        <td>@(issue.ReturnDate == null ? "Not Returned" : issue.ReturnDate?.ToShortDateString())</td>
+                        <td>@issue.FineAmount</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+>>>>>>> 0d323f99f8dcd0d9e554e5f27dd629af1015fa09

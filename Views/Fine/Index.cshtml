@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Fine Report";
 }
+<<<<<<< HEAD
 
 <h2>Fine Report</h2>
 
@@ -30,3 +31,85 @@
         }
     </tbody>
 </table>
+=======
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Manage Fines";
+}
+@model LMS.ViewModel.FineVM
+
+<h1>Hey! This is Fine Controller Index</h1>
+
+<form asp-action="Index" asp-controller="Fine" method="post">
+    <div>
+        <label>Member ID</label>
+        <input type="number" asp-for="MemberId" placeholder="Enter Member ID" />
+    </div>
+
+    <div>
+        <label>Issue ID</label>
+        <input type="number" asp-for="BookIssueId" placeholder="Enter Issue ID" />
+    </div>
+
+    <div>
+        <label>Fine Amount</label>
+        <input type="number" asp-for="FineAmount" placeholder="Enter Fine Amount" step="0.01" />
+    </div>
+
+    <div>
+        <label>Fine Date</label>
+        <input type="date" asp-for="FineDate" placeholder="Enter Fine Date" />
+    </div>
+
+    <div>
+        <label>Payment Status</label>
+        <select asp-for="PaymentStatus">
+            <option value="">-- Select Status --</option>
+            <option value="Paid">Paid</option>
+            <option value="Unpaid">Unpaid</option>
+        </select>
+    </div>
+
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+<hr />
+
+<!-- Optional: Display existing fines below the form -->
+@if (ViewData.ModelState.IsValid && Model != null)
+{
+    <h3>Existing Fine Records (Optional Display)</h3>
+}
+
+<!-- Example of listing all fines (if controller passes list data) -->
+@if (Model != null && ViewBag.FineList != null)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Fine ID</th>
+                <th>Member ID</th>
+                <th>Issue ID</th>
+                <th>Fine Amount</th>
+                <th>Fine Date</th>
+                <th>Payment Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fine in ViewBag.FineList)
+            {
+                <tr>
+                    <td>@fine.FineId</td>
+                    <td>@fine.MemberId</td>
+                    <td>@fine.IssueId</td>
+                    <td>@fine.FineAmount</td>
+                    <td>@fine.FineDate.ToShortDateString()</td>
+                    <td>@fine.PaymentStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+>>>>>>> 0d323f99f8dcd0d9e554e5f27dd629af1015fa09
