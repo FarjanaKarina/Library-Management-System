@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<LMS.DataModel.Book>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Manage Books";
+}
 
 <h2>Book List</h2>
 <a href="/Book/Create" class="btn btn-primary mb-2">Add New Book</a>
